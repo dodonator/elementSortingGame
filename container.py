@@ -44,3 +44,29 @@ class Container:
             return len(set(self)) == 1
         else:
             return False
+
+    def _top_chain_length(self) -> int:  # name is WIP
+        tcl = 0
+        if self.is_empty():
+            return tcl
+
+        top_element = self[-1]
+        for element in reversed(self):
+            if element == top_element:
+                tcl += 1
+            else:
+                break
+        return tcl
+
+    def _bottom_chain_length(self) -> int:  # name is WIP
+        bcl = 0
+        if self.is_empty():
+            return bcl
+
+        bottom_element = self[0]
+        for element in self:
+            if element == bottom_element:
+                bcl += 1
+            else:
+                break
+        return bcl

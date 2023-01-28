@@ -61,7 +61,7 @@ class Container:
             return tcl
 
         for element in reversed(self):
-            if element == self.top:
+            if element == self.top():
                 tcl += 1
             else:
                 break
@@ -73,7 +73,7 @@ class Container:
             return bcl
 
         for element in self.inventory:
-            if element == self.bottom:
+            if element == self.bottom():
                 bcl += 1
             else:
                 break

@@ -118,8 +118,3 @@ class Puzzle:
             print()
         print(f'--|{"-|"*self.container_num}')
         print(f'  |{"|".join(map(str, range(self.container_num)))}|')
-
-
-p = Puzzle(4, 4, 2)
-p.fill_randomly()
-p.print()

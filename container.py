@@ -38,3 +38,9 @@ class Container:
 
     def is_full(self) -> bool:
         return len(self) == self.size_limit
+
+    def is_finished(self) -> bool:
+        if self.is_full():
+            return len(set(self)) == 1
+        else:
+            return False

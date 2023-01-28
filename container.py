@@ -45,12 +45,12 @@ class Container:
         else:
             return False
 
-    def _top_element(self):
+    def top(self):
         if self.is_empty():
             return None
         return self[-1]
 
-    def _bottom_element(self):
+    def bottom(self):
         if self.is_empty():
             return None
         return self[0]
@@ -61,7 +61,7 @@ class Container:
             return tcl
 
         for element in reversed(self):
-            if element == self._top_element:
+            if element == self.top:
                 tcl += 1
             else:
                 break
@@ -73,7 +73,7 @@ class Container:
             return bcl
 
         for element in self.inventory:
-            if element == self._bottom_element:
+            if element == self.bottom:
                 bcl += 1
             else:
                 break

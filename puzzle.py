@@ -90,6 +90,19 @@ class Puzzle:
         # return the moved element
         return element
 
+    def is_finished(self) -> bool:
+        for container in self.storage:
+            if container.is_empty():
+                continue
+            elif container.is_full():
+                if len(set(container)) != 1:
+                    break
+            else:
+                break
+        else:
+            return True
+        return False
+
     def print(self) -> None:
         for height in range(self.container_size-1, -1, -1):
             print(f'{height} |', end='')

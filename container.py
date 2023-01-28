@@ -10,7 +10,7 @@ class Container:
         return len(self.inventory)
 
     def add(self, element):
-        if len(self) < self.size_limit:
+        if not self.is_full():
             self.inventory.append(element)
 
     def pop(self):
@@ -20,3 +20,6 @@ class Container:
 
     def is_empty(self) -> bool:
         return len(self)
+
+    def is_full(self) -> bool:
+        return len(self) == self.size_limit

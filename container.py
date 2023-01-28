@@ -34,7 +34,7 @@ class Container:
             return element
 
     def is_empty(self) -> bool:
-        return len(self)
+        return not bool(self.inventory)
 
     def is_full(self) -> bool:
         return len(self) == self.size_limit

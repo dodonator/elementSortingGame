@@ -29,7 +29,6 @@ while True:
             source, target = last_move
         case [src, "-", tgt]:
             # do move
-            # source, target = tuple(map(int, cmd.split('-')))
             source, target = int(src), int(tgt)
         case _:
             # undo last move

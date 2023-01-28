@@ -45,14 +45,23 @@ class Container:
         else:
             return False
 
+    def _top_element(self):
+        if self.is_empty():
+            return None
+        return self[-1]
+
+    def _bottom_element(self):
+        if self.is_empty():
+            return None
+        return self[0]
+
     def _top_chain_length(self) -> int:  # name is WIP
         tcl = 0
         if self.is_empty():
             return tcl
 
-        top_element = self[-1]
         for element in reversed(self):
-            if element == top_element:
+            if element == self._top_element:
                 tcl += 1
             else:
                 break
@@ -63,9 +72,8 @@ class Container:
         if self.is_empty():
             return bcl
 
-        bottom_element = self[0]
         for element in self.inventory:
-            if element == bottom_element:
+            if element == self._bottom_element:
                 bcl += 1
             else:
                 break

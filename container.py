@@ -16,6 +16,10 @@ class Container:
         for element in reversed(self.inventory):
             yield element
 
+    def __getitem__(self, index: int):
+        assert index in range(self.size_limit)
+        return self.inventory[index]
+
     def add(self, element):
         if not self.is_full():
             self.inventory.append(element)

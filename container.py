@@ -17,7 +17,7 @@ class Container:
             yield element
 
     def __getitem__(self, index: int):
-        assert index in range(self.size_limit)
+        assert index in range(-self.size_limit, self.size_limit)
         try:
             element = self.inventory[index]
         except IndexError:
@@ -64,7 +64,7 @@ class Container:
             return bcl
 
         bottom_element = self[0]
-        for element in self:
+        for element in self.inventory:
             if element == bottom_element:
                 bcl += 1
             else:

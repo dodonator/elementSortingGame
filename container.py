@@ -13,7 +13,7 @@ class Container:
         if len(self) < self.size_limit:
             self.inventory.append(element)
 
-    def pop(self, element):
+    def pop(self):
         if len(self) > 0:
             element = self.inventory.pop()
             return element

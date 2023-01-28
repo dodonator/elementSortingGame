@@ -2,6 +2,7 @@ from string import ascii_uppercase
 from collections import Counter
 import random
 import sys
+from container import Container
 
 
 class Puzzle:
@@ -23,10 +24,11 @@ class Puzzle:
         self.container_num: int = self.element_type_num + self.spare_container
 
         # creating an empty puzzle
-        self.container: list[list] = []
+        self.storage: list[Container] = []
 
         for i in range(self.container_num):
-            self.container.append([])
+            con = Container(self.container_size)
+            self.storage.append(con)
 
     def fill_randomly(self):
         # fill the puzzle only if it is empty
@@ -51,7 +53,7 @@ class Puzzle:
             # filter container which are already filled
             available_container_idx = list(
                 filter(lambda con_idx: len(
-                    self.container[con_idx]) < self.container_size, range(self.container_num)))
+                    self.storage[con_idx]) < self.container_size, range(self.container_num)))
 
             # randomly choose a type of element
             e_type = rng.choice(available_types)
@@ -60,8 +62,8 @@ class Puzzle:
             container_idx = rng.choice(available_container_idx)
 
             # push the chosen element on top of the container
-            selected_container = self.container[container_idx]
-            selected_container.append(e_type)
+            selected_container = self.storage[container_idx]
+            selected_container.add(e_type)
 
             # update the counter for the chosen element type
             element_counter[e_type] += 1
@@ -71,24 +73,23 @@ class Puzzle:
         assert target in range(self.container_num)
 
         # check if the target container still has space
-        if len(self.container[target]) >= self.container_size:
+        if len(self.storage[target]) >= self.container_size:
             # target container is already full
             return
 
         # pull the first element from the source container
-        element = self.container[source].pop()
+        element = self.storage[source].pop()
 
         # push the element on the target container
-        self.container[target].append(element)
+        self.storage[target].add(element)
         return element
 
     def print(self) -> None:
         for height in range(self.container_size-1, -1, -1):
             print(f'{height} |', end='')
-            for container in self.container:
-                try:
-                    element = container[height]
-                except IndexError:
+            for container in self.storage:
+                element = container.pop()
+                if element is None:
                     element = ' '
                 print(f'{element}|', end='')
             print()

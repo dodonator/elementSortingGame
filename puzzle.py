@@ -51,18 +51,16 @@ class Puzzle:
                 lambda e_type: element_counter[e_type] < self.container_size, self.element_types))
 
             # filter container which are already filled
-            available_container_idx = list(
-                filter(lambda con_idx: len(
-                    self.storage[con_idx]) < self.container_size, range(self.container_num)))
+            available_container = filter(
+                lambda con: not con.is_full(), self.storage)
 
             # randomly choose a type of element
             e_type = rng.choice(available_types)
 
             # select a available container to add the element to
-            container_idx = rng.choice(available_container_idx)
+            selected_container = rng.choice(available_container)
 
             # push the chosen element on top of the container
-            selected_container = self.storage[container_idx]
             selected_container.add(e_type)
 
             # update the counter for the chosen element type
@@ -72,16 +70,24 @@ class Puzzle:
         assert source in range(self.container_num)
         assert target in range(self.container_num)
 
+        source_container: Container = self.storage[source]
+        target_container: Container = self.storage[target]
+
+        # check if the source container contains elements
+        if source_container.is_empty():
+            return
+
         # check if the target container still has space
-        if len(self.storage[target]) >= self.container_size:
-            # target container is already full
+        if target_container.is_full():
             return
 
         # pull the first element from the source container
-        element = self.storage[source].pop()
+        element = source_container.pop()
 
         # push the element on the target container
-        self.storage[target].add(element)
+        target_container.add(element)
+
+        # return the moved element
         return element
 
     def print(self) -> None:

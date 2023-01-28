@@ -51,8 +51,8 @@ class Puzzle:
                 lambda e_type: element_counter[e_type] < self.container_size, self.element_types))
 
             # filter container which are already filled
-            available_container = filter(
-                lambda con: not con.is_full(), self.storage)
+            available_container = list(filter(
+                lambda con: not con.is_full(), self.storage))
 
             # randomly choose a type of element
             e_type = rng.choice(available_types)

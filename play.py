@@ -15,6 +15,11 @@ last_move = ()
 while True:
     puzzle.print()
     print()
+
+    # check the win condition
+    if puzzle.is_finished():
+        break
+
     print(f"Your last move was {last_move}")
 
     cmd = input("source-target: ")
@@ -34,10 +39,6 @@ while True:
     if element is None:
         print("This move is not allowed.")
         continue
-
-    # check the win condition
-    if puzzle.is_finished():
-        break
 
     movement_counter += 1
     last_move = source, target

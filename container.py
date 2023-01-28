@@ -18,7 +18,11 @@ class Container:
 
     def __getitem__(self, index: int):
         assert index in range(self.size_limit)
-        return self.inventory[index]
+        try:
+            element = self.inventory[index]
+        except IndexError:
+            element = None
+        return element
 
     def add(self, element):
         if not self.is_full():

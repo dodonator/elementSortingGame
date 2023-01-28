@@ -3,6 +3,7 @@ from collections import Counter
 import random
 import sys
 from container import Container
+from typing import Iterator
 
 
 class Puzzle:
@@ -118,3 +119,7 @@ class Puzzle:
             print()
         print(f'--|{"-|"*self.container_num}')
         print(f'  |{"|".join(map(str, range(self.container_num)))}|')
+
+    def __iter__(self) -> Iterator[Container]:
+        for container in self.storage:
+            yield container

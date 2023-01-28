@@ -107,7 +107,7 @@ class Puzzle:
         for height in range(self.container_size-1, -1, -1):
             print(f'{height} |', end='')
             for container in self.storage:
-                element = container.pop()
+                element = container[height]
                 if element is None:
                     element = ' '
                 print(f'{element}|', end='')

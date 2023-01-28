@@ -6,8 +6,9 @@ from container import Container
 
 
 class Puzzle:
-
-    def __init__(self, element_type_num: int, container_size: int, spare_container: int) -> None:
+    def __init__(
+        self, element_type_num: int, container_size: int, spare_container: int
+    ) -> None:
 
         self.element_type_num: int = element_type_num  # number of types of elements
 
@@ -32,7 +33,7 @@ class Puzzle:
 
     def fill_randomly(self):
         # fill the puzzle only if it is empty
-        if hasattr(self, 'seed'):
+        if hasattr(self, "seed"):
             # ToDo: raise Exception
             return
 
@@ -42,17 +43,23 @@ class Puzzle:
 
         # set up a counter to count how many elements of the same type were already used
         element_counter: Counter = Counter(
-            zip(self.element_types, [0]*self.element_type_num))
+            zip(self.element_types, [0] * self.element_type_num)
+        )
 
         for _ in range(self.element_type_num * self.container_size):
 
             # filter element types whose counters have reached the size limit
-            available_types = list(filter(
-                lambda e_type: element_counter[e_type] < self.container_size, self.element_types))
+            available_types = list(
+                filter(
+                    lambda e_type: element_counter[e_type] < self.container_size,
+                    self.element_types,
+                )
+            )
 
             # filter container which are already filled
-            available_container = list(filter(
-                lambda con: not con.is_full(), self.storage))
+            available_container = list(
+                filter(lambda con: not con.is_full(), self.storage)
+            )
 
             # randomly choose a type of element
             e_type = rng.choice(available_types)
@@ -101,13 +108,13 @@ class Puzzle:
         return True
 
     def print(self) -> None:
-        for height in range(self.container_size-1, -1, -1):
-            print(f'{height} |', end='')
+        for height in range(self.container_size - 1, -1, -1):
+            print(f"{height} |", end="")
             for container in self.storage:
                 element = container[height]
                 if element is None:
-                    element = ' '
-                print(f'{element}|', end='')
+                    element = " "
+                print(f"{element}|", end="")
             print()
         print(f'--|{"-|"*self.container_num}')
         print(f'  |{"|".join(map(str, range(self.container_num)))}|')

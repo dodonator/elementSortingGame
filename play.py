@@ -4,25 +4,25 @@ from puzzle import Puzzle
 puzzle = Puzzle(4, 4, 2)
 puzzle.fill_randomly()
 
-print('How to play:')
-print('Input your movements in the format <source>-<target>')
-print('Leave input blank to repeat last move')
-print('Enter any character to undo the last move')
-print('')
+print("How to play:")
+print("Input your movements in the format <source>-<target>")
+print("Leave input blank to repeat last move")
+print("Enter any character to undo the last move")
+print("")
 
 movement_counter = 0
 last_move = ()
 while True:
     puzzle.print()
     print()
-    print(f'Your last move was {last_move}')
+    print(f"Your last move was {last_move}")
 
-    cmd = input('source-target: ')
+    cmd = input("source-target: ")
     match list(cmd):
         case []:
             # repeat last move
             source, target = last_move
-        case [src, '-', tgt]:
+        case [src, "-", tgt]:
             # do move
             # source, target = tuple(map(int, cmd.split('-')))
             source, target = int(src), int(tgt)
@@ -32,7 +32,7 @@ while True:
 
     element = puzzle.move(source, target)
     if element is None:
-        print('This move is not allowed.')
+        print("This move is not allowed.")
         continue
 
     # check the win condition
@@ -41,10 +41,10 @@ while True:
 
     movement_counter += 1
     last_move = source, target
-    print('\n')
+    print("\n")
 
 print()
-print('you finished the puzzle')
-print(f'it took you {movement_counter} moves')
+print("you finished the puzzle")
+print(f"it took you {movement_counter} moves")
 
 puzzle.print()

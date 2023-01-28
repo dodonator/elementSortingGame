@@ -1,3 +1,6 @@
+from typing import Iterator
+
+
 class Container:
     size_limit: int
     inventory: list
@@ -8,6 +11,10 @@ class Container:
 
     def __len__(self) -> int:
         return len(self.inventory)
+
+    def __iter__(self) -> Iterator:
+        for element in reversed(self.inventory):
+            yield element
 
     def add(self, element):
         if not self.is_full():

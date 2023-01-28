@@ -9,7 +9,7 @@ class Container:
     def __init__(self, size_limit: int):
         self.size_limit = size_limit
         self.inventory = []
-        self.current_index += 1
+        self.current_index = 0
 
     def __len__(self) -> int:
         return len(self.inventory)

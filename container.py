@@ -4,10 +4,12 @@ from typing import Iterator
 class Container:
     size_limit: int
     inventory: list
+    current_index: int
 
     def __init__(self, size_limit: int):
         self.size_limit = size_limit
         self.inventory = []
+        self.current_index += 1
 
     def __len__(self) -> int:
         return len(self.inventory)
@@ -27,10 +29,12 @@ class Container:
     def add(self, element):
         if not self.is_full():
             self.inventory.append(element)
+            self.current_index += 1
 
     def pop(self):
-        if len(self) > 0:
+        if not self.is_empty():
             element = self.inventory.pop()
+            self.current_index -= 1
             return element
 
     def is_empty(self) -> bool:

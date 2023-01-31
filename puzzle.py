@@ -20,7 +20,7 @@ class Puzzle:
         self.element_type_num: int = element_type_num  # number of types of elements
 
         # generate the required number of elements
-        self.element_types: list[str] = ascii_uppercase[:element_type_num]
+        self.element_types: list[str] = list(ascii_uppercase[:element_type_num])
 
         # set the size of a container
         self.container_size: int = container_size

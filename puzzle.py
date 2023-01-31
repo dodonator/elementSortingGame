@@ -3,14 +3,20 @@ from collections import Counter
 import random
 import sys
 from container import Container
-from typing import Iterator
+from typing import Iterator, Optional
 
 
 class Puzzle:
     def __init__(
         self, element_type_num: int, container_size: int, spare_container: int
     ) -> None:
+        """Puzzle constructor.
 
+        Args:
+            element_type_num (int): number of element types
+            container_size (int): size limit for containers
+            spare_container (int): number of extra containers
+        """
         self.element_type_num: int = element_type_num  # number of types of elements
 
         # generate the required number of elements
@@ -33,6 +39,7 @@ class Puzzle:
             self.storage.append(con)
 
     def fill_randomly(self):
+        """Fill the puzzle randomly."""
         # fill the puzzle only if it is empty
         if hasattr(self, "seed"):
             # ToDo: raise Exception
@@ -74,7 +81,16 @@ class Puzzle:
             # update the counter for the chosen element type
             element_counter[e_type] += 1
 
-    def move(self, source: int, target: int) -> str:
+    def move(self, source: int, target: int) -> Optional[str]:
+        """Move top element from source to target.
+
+        Args:
+            source (int): index of source container
+            target (int): index of target container
+
+        Returns:
+            Optional[str]: moved element or None if no movement was done
+        """
         assert source in range(self.container_num)
         assert target in range(self.container_num)
 
@@ -99,10 +115,20 @@ class Puzzle:
         return element
 
     def moveable(self) -> Iterator[tuple[int, int]]:
-        for container_idx, container in enumerate(self.storage):
+        """Iterates over the top elements.
+
+        Yields:
+            Iterator[tuple[int, int]]: container index, top element
+        """
+        for container_idx, container in enumerate(self):
             yield container_idx, container.top()
 
     def is_finished(self) -> bool:
+        """Returns if the win condition is achieved.
+
+        Returns:
+            bool: result
+        """
         for container in self.storage:
             if container.is_empty():
                 continue
@@ -113,6 +139,7 @@ class Puzzle:
         return True
 
     def print(self) -> None:
+        """Print the puzzle."""
         for height in range(self.container_size - 1, -1, -1):
             print(f"{height} |", end="")
             for container in self.storage:
@@ -125,5 +152,10 @@ class Puzzle:
         print(f'  |{"|".join(map(str, range(self.container_num)))}|')
 
     def __iter__(self) -> Iterator[Container]:
+        """Iterate over the container.
+
+        Yields:
+            Iterator[Container]: current container
+        """
         for container in self.storage:
             yield container

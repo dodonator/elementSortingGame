@@ -98,6 +98,10 @@ class Puzzle:
         # return the moved element
         return element
 
+    def moveable(self) -> Iterator[tuple[int, int]]:
+        for container_idx, container in enumerate(self.storage):
+            yield container_idx, container.top()
+
     def is_finished(self) -> bool:
         for container in self.storage:
             if container.is_empty():

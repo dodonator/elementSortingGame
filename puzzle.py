@@ -159,3 +159,15 @@ class Puzzle:
         """
         for container in self.storage:
             yield container
+
+    def __getitem__(self, container_idx: int) -> Container:
+        """Returns container at given index.
+
+        Args:
+            container_idx (int): container index
+
+        Returns:
+            Container: container
+        """
+        container = self.storage[container_idx]
+        return container

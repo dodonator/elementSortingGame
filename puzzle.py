@@ -97,16 +97,16 @@ class Puzzle:
         source_container: Container = self.storage[source]
         target_container: Container = self.storage[target]
 
+        # pull the first element from the source container
+        element = source_container.pop()
+
         # check if the source container contains elements
-        if source_container.is_empty():
-            return
+        if element is None:
+            return None
 
         # check if the target container still has space
         if target_container.is_full():
-            return
-
-        # pull the first element from the source container
-        element = source_container.pop()
+            return None
 
         # push the element on the target container
         target_container.add(element)
@@ -114,7 +114,7 @@ class Puzzle:
         # return the moved element
         return element
 
-    def moveable(self) -> Iterator[tuple[int, int]]:
+    def moveable(self) -> Iterator[tuple[int, Optional[str]]]:
         """Iterates over the top elements.
 
         Yields:

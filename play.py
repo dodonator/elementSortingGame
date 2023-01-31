@@ -4,6 +4,15 @@ from puzzle import Puzzle
 puzzle = Puzzle(4, 4, 2)
 puzzle.fill_randomly()
 
+print("rules:")
+print("The goal of the game is to sort the different elements")
+print("into the containers based on their type.")
+print("To do this, you take an element from the top of one container")
+print("and put it on another container.")
+print("You can only move one element at a time.")
+print("The goal is reached when there is one container")
+print("for each element type, in which all elements of this type are stacked.")
+
 print("How to play:")
 print("Input your movements in the format <source>-<target>")
 print("Leave input blank to repeat last move")

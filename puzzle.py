@@ -17,7 +17,8 @@ class Puzzle:
             container_size (int): size limit for containers
             spare_container (int): number of extra containers
         """
-        self.element_type_num: int = element_type_num  # number of types of elements
+        # number of types of elements
+        self.element_type_num: int = element_type_num
 
         # generate the required number of elements
         self.element_types: list[str] = list(ascii_uppercase[:element_type_num])
@@ -49,7 +50,7 @@ class Puzzle:
         self.seed = random.randrange(sys.maxsize)
         rng = random.Random(self.seed)
 
-        # set up a counter to count how many elements of the same type were already used
+        # count how many elements of the same type were already used
         element_counter: Counter = Counter(
             zip(self.element_types, [0] * self.element_type_num)
         )

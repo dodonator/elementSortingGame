@@ -2,19 +2,19 @@ from typing import Iterator, Optional
 
 
 class Container:
-    size_limit: int
+    maximum_capacity: int
     inventory: list
-    current_index: int
+    current_capacity: int
 
-    def __init__(self, size_limit: int):
+    def __init__(self, maximum_capacity: int):
         """Container constructor.
 
         Args:
-            size_limit (int): max capacity of container
+            maximum_capacity (int): max capacity of container
         """
-        self.size_limit = size_limit
+        self.maximum_capacity = maximum_capacity
         self.inventory = []
-        self.current_index = 0
+        self.current_capacity = 0
 
     def __len__(self) -> int:
         """Returns the current capacity.
@@ -42,7 +42,7 @@ class Container:
         Returns:
             Optional[str]: element or None
         """
-        assert index in range(-self.size_limit, self.size_limit)
+        assert index in range(-self.maximum_capacity, self.maximum_capacity)
         try:
             element = self.inventory[index]
         except IndexError:
@@ -57,7 +57,7 @@ class Container:
         """
         if not self.is_full():
             self.inventory.append(element)
-            self.current_index += 1
+            self.current_capacity += 1
 
     def pop(self) -> Optional[str]:
         """Pops an element from the container.
@@ -69,7 +69,7 @@ class Container:
         """
         if not self.is_empty():
             element = self.inventory.pop()
-            self.current_index -= 1
+            self.current_capacity -= 1
             return element
         else:
             return None
@@ -88,7 +88,7 @@ class Container:
         Returns:
             bool: result
         """
-        return len(self) == self.size_limit
+        return len(self) == self.maximum_capacity
 
     def is_finished(self) -> bool:
         """Returns  if the container is finished.

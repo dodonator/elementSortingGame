@@ -11,7 +11,7 @@ print("Enter any character to undo the last move")
 print("")
 
 movement_counter = 0
-last_move = ()
+last_move: tuple[int, int] = (-1, -1)
 while True:
     puzzle.print()
     print()

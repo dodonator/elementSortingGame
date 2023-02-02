@@ -4,6 +4,7 @@ import random
 import sys
 from container import Container
 from typing import Iterator, Optional
+from errors import EmptySource, FullTarget
 
 
 class Puzzle:
@@ -103,11 +104,15 @@ class Puzzle:
 
         # check if the source container contains elements
         if element is None:
-            return None
+            raise EmptySource(
+                f"Source container {source} doesn't contain any elements."
+            )
+            # return None
 
         # check if the target container still has space
         if target_container.is_full():
-            return None
+            raise FullTarget(f"Target container {target} is full.")
+            # return None
 
         # push the element on the target container
         target_container.add(element)
